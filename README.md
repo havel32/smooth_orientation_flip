@@ -1,3 +1,3 @@
-# example_video_orientation
+# Making video rotate smoothly
 
-A new Flutter project.
+soon...
