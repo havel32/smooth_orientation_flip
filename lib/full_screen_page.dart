@@ -26,8 +26,8 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
 
   @override
   void dispose() {
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     super.dispose();
   }
 
@@ -36,11 +36,11 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
-    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }
 
   Future<void> buildCompleteActions() async {
-    await Future.delayed(Durations.long3);
+    await Future.delayed(Durations.short2);
 
     changeOrientation();
   }
@@ -53,7 +53,7 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
       body: Stack(
         children: [
           Align(
-            alignment: Alignment.topCenter,
+            alignment: Alignment.center,
             child: Hero(
               tag: "video",
               child: AspectRatio(

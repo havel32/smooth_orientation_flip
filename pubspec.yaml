@@ -1,6 +1,6 @@
 name: example_video_orientation
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   video_player: ^2.9.3
+  page_transition: ^2.2.1
 
 dev_dependencies:
   flutter_test:

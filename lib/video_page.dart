@@ -1,6 +1,7 @@
 import 'package:example_video_orientation/full_screen_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoApp extends StatefulWidget {
@@ -13,7 +14,6 @@ class VideoApp extends StatefulWidget {
 class _VideoAppState extends State<VideoApp>
     with SingleTickerProviderStateMixin {
   late VideoPlayerController _controller;
-  late AnimationController _animationController;
   _VideoAppState();
   @override
   void initState() {
@@ -26,20 +26,18 @@ class _VideoAppState extends State<VideoApp>
       ..initialize().then((_) {
         setState(() {});
       });
-
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 2),
-    );
   }
 
   void _toggleFullScreen() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => FullScreenVideo(controller: _controller),
-        // fullscreenDialog: true,
-      ),
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => FullScreenVideo(controller: _controller),
+    //   ),
+    // );
+    context.pushTransition(
+      type: PageTransitionType.fade,
+      childBuilder: (context) => FullScreenVideo(controller: _controller),
     );
   }
 
