@@ -29,6 +29,7 @@ class _VideoAppState extends State<VideoApp>
   }
 
   void _toggleFullScreen() {
+
     // Navigator.push(
     //   context,
     //   MaterialPageRoute(
@@ -39,19 +40,56 @@ class _VideoAppState extends State<VideoApp>
       type: PageTransitionType.fade,
       childBuilder: (context) => FullScreenVideo(controller: _controller),
     );
+
+    // SystemChrome.setPreferredOrientations([
+    //   DeviceOrientation.landscapeLeft,
+    //   DeviceOrientation.landscapeRight,
+    // ]);
+    // Navigator.push(
+    //   context,
+    //   PageRouteBuilder(
+    //     transitionDuration: const Duration(milliseconds: 200),
+    //     pageBuilder: (context, animation, secondaryAnimation) {
+    //       return FullScreenVideo(controller: _controller);
+    //     },
+    //     transitionsBuilder: (context, animation, secondaryAnimation, child) {
+    //       // final slideAnimation = Tween<Offset>(
+    //       //   begin: const Offset(0.0, 1.0),
+    //       //   end: Offset.zero,
+    //       // ).animate(
+    //       //   CurvedAnimation(parent: animation, curve: Curves.easeInOut),
+    //       // );
+    //       return
+    //       //  SlideTransition(
+    //       //   position: slideAnimation,
+    //       //   child:
+    //       FadeTransition(
+    //         opacity: animation,
+    //         child: child,
+    //         // )
+    //       );
+    //     },
+    //   ),
+    // )
+    // .then((_) {
+    //   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    //   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    // })
+    ;
   }
 
   @override
   Widget build(BuildContext context) {
-    timeDilation = 1.0;
+    timeDilation = 8;
     double videplayerHeight = 200;
-    double videplayerWidth = _controller.value.aspectRatio * videplayerHeight;
-    // print(_controller.value.aspectRatio);
+    double videplayerWidth = 1.666 * videplayerHeight;
+    // double videplayerWidth = _controller.value.aspectRatio * videplayerHeight;
     return Scaffold(
       appBar: AppBar(title: const Text('Video Demo')),
       body: Column(
         children: [
           _controller.value.isInitialized
+              // true
               ? SizedBox(
                 height: videplayerHeight,
                 width: videplayerWidth,
@@ -67,6 +105,7 @@ class _VideoAppState extends State<VideoApp>
                           child: VideoPlayer(_controller),
                         ),
                       ),
+                      // Container(color: Colors.green),
                     ),
                     Align(
                       alignment: Alignment.bottomRight,
@@ -75,19 +114,19 @@ class _VideoAppState extends State<VideoApp>
                         onPressed: _toggleFullScreen,
                       ),
                     ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            _controller.value.isPlaying
-                                ? _controller.pause()
-                                : _controller.play();
-                          });
-                        },
-                        icon: Icon(Icons.play_arrow, color: Colors.white),
-                      ),
-                    ),
+                    // Align(
+                    //   alignment: Alignment.center,
+                    //   child: IconButton(
+                    //     onPressed: () {
+                    //       setState(() {
+                    //         _controller.value.isPlaying
+                    //             ? _controller.pause()
+                    //             : _controller.play();
+                    //       });
+                    //     },
+                    //     icon: Icon(Icons.play_arrow, color: Colors.white),
+                    //   ),
+                    // ),
                   ],
                 ),
               )
@@ -100,19 +139,18 @@ class _VideoAppState extends State<VideoApp>
               ),
               itemCount: 18,
               itemBuilder: (context, index) {
-                return ColoredBox(
-                  color: Color.fromRGBO(
-                    index * 5,
-                    index * 4,
-                    index * 3,
-                    index * 0.2,
-                  ),
-                  child: ListTile(
-                    title: Text(index.toString()),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [],
-                    ),
+                return Container(
+                  color: Colors.red,
+                  child: Stack(
+                    children: [
+                      Image.network(
+                        fit: BoxFit.fill,
+                        width: double.infinity,
+                        height: double.infinity,
+                        "https://img.freepik.com/free-photo/street-with-trees-sides_1194-1228.jpg?semt=ais_hybrid",
+                      ),
+                      Text("dwadawdawdawdawd"),
+                    ],
                   ),
                 );
               },

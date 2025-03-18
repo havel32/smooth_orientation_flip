@@ -7,6 +7,7 @@ class FullScreenVideo extends StatefulWidget {
   final VideoPlayerController controller;
 
   const FullScreenVideo({super.key, required this.controller});
+  // const FullScreenVideo({super.key});
 
   @override
   State<FullScreenVideo> createState() => _FullScreenVideoState();
@@ -40,14 +41,12 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
   }
 
   Future<void> buildCompleteActions() async {
-    await Future.delayed(Durations.short2);
-
     changeOrientation();
   }
 
   @override
   Widget build(BuildContext context) {
-    timeDilation = 1;
+    timeDilation = 8;
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
@@ -62,26 +61,23 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
               ),
             ),
           ),
-          SafeArea(
-            child: IconButton(
-              icon: const Icon(Icons.fullscreen_exit, color: Colors.white),
-              onPressed: () async {
-                await Future.microtask(() async {
-                  await SystemChrome.setPreferredOrientations([
-                    DeviceOrientation.portraitUp,
-                  ]);
-                  await SystemChrome.setEnabledSystemUIMode(
-                    SystemUiMode.edgeToEdge,
-                  );
-                });
-
-                await Future.delayed(const Duration(milliseconds: 200));
-                Navigator.pop(context);
-              },
-            ),
+          IconButton(
+            icon: const Icon(Icons.fullscreen_exit, color: Colors.white),
+            onPressed: () async {
+              await Future.microtask(() async {
+                await SystemChrome.setPreferredOrientations([
+                  DeviceOrientation.portraitUp,
+                ]);
+                await SystemChrome.setEnabledSystemUIMode(
+                  SystemUiMode.edgeToEdge,
+                );
+              });
+              Navigator.pop(context);
+            },
           ),
         ],
       ),
+      // ),
       // ),
     );
   }
