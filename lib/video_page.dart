@@ -34,12 +34,19 @@ class _VideoAppState extends State<VideoApp>
   void _toggleFullScreen() {
     final isIos = Theme.of(context).platform == TargetPlatform.iOS;
 
-    isIos
-        ? context.pushTransition(
-          type: PageTransitionType.fade,
-          duration: Durations.medium2,
-          child: FullScreenVideo(controller: _controller),
-        )
+    true
+        ? context
+            .pushTransition(
+              type: PageTransitionType.fade,
+              duration: Durations.medium2,
+              child: FullScreenVideo(controller: _controller),
+            )
+            .then((_) {
+              SystemChrome.setPreferredOrientations([
+                DeviceOrientation.portraitUp,
+              ]);
+              SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+            })
         // ? Navigator.of(context).push(
         //   PageRouteBuilder(
         //     transitionDuration: const Duration(milliseconds: 200),

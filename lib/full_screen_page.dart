@@ -38,7 +38,7 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
 
   @override
   Widget build(BuildContext context) {
-    timeDilation = 3;
+    timeDilation = 1;
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
@@ -68,7 +68,7 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
                 //     SystemUiMode.edgeToEdge,
                 //   );
                 // });
-                // await Future.delayed(Durations.medium1);
+                await Future.delayed(Durations.medium1);
                 Navigator.pop(context);
               },
             ),
