@@ -20,8 +20,6 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
 
   @override
   void dispose() {
-    // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     super.dispose();
   }
 
@@ -34,42 +32,19 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
   }
 
   Future<void> buildCompleteActions() async {
-    await Future.delayed(Durations.extralong4);
+    await Future.delayed(Durations.short1);
     changeOrientation();
   }
 
   @override
   Widget build(BuildContext context) {
-    timeDilation = 10;
+    timeDilation = 3;
     return Scaffold(
       backgroundColor: Colors.black,
-      body:
-      // Hero(
-      //   tag: "video",
-      // flightShuttleBuilder: (
-      //   flightContext,
-      //   animation,
-      //   flightDirection,
-      //   fromHeroContext,
-      //   toHeroContext,
-      // ) {
-      //   final slideAnimation = Tween<Offset>(
-      //     begin: const Offset(0.5, 0.0),
-      //     end: Offset(1, 1.0),
-      //   ).animate(
-      //     CurvedAnimation(parent: animation, curve: Curves.easeInOut),
-      //   );
-      //   HeroFlightDirection.pop;
-      //   return SlideTransition(
-      //     position: slideAnimation,
-      //     child: toHeroContext.widget,
-      //   );
-      // },
-      // child:
-      Stack(
+      body: Stack(
         children: [
           Align(
-            alignment: Alignment.center,
+            alignment: Alignment.topCenter,
             child: Hero(
               tag: "video",
               child: AspectRatio(
@@ -80,21 +55,20 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
           ),
 
           // ),
-          
           Align(
             alignment: Alignment.bottomRight,
             child: IconButton(
               icon: const Icon(Icons.fullscreen_exit, color: Colors.white),
               onPressed: () async {
-                await Future.microtask(() async {
-                  await SystemChrome.setPreferredOrientations([
-                    DeviceOrientation.portraitUp,
-                  ]);
-                  await SystemChrome.setEnabledSystemUIMode(
-                    SystemUiMode.edgeToEdge,
-                  );
-                });
-                await Future.delayed(Durations.medium1);
+                // await Future.microtask(() async {
+                //   await SystemChrome.setPreferredOrientations([
+                //     DeviceOrientation.portraitUp,
+                //   ]);
+                //   await SystemChrome.setEnabledSystemUIMode(
+                //     SystemUiMode.edgeToEdge,
+                //   );
+                // });
+                // await Future.delayed(Durations.medium1);
                 Navigator.pop(context);
               },
             ),

@@ -34,9 +34,10 @@ class _VideoAppState extends State<VideoApp>
   void _toggleFullScreen() {
     final isIos = Theme.of(context).platform == TargetPlatform.iOS;
 
-    true
+    isIos
         ? context.pushTransition(
           type: PageTransitionType.fade,
+          duration: Durations.medium2,
           child: FullScreenVideo(controller: _controller),
         )
         // ? Navigator.of(context).push(
@@ -135,7 +136,7 @@ class _VideoAppState extends State<VideoApp>
 
   @override
   Widget build(BuildContext context) {
-    timeDilation = 10;
+    timeDilation = 1;
     double videplayerHeight = 200;
     // double videplayerWidth = 1.666 * videplayerHeight;
     double videplayerWidth = _controller.value.aspectRatio * videplayerHeight;
