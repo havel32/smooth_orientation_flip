@@ -1,4 +1,5 @@
 import 'package:example_video_orientation/video_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AnotherPage extends StatelessWidget {
@@ -35,6 +36,11 @@ class AnotherPage extends StatelessWidget {
               },
               icon: Icon(Icons.video_collection_rounded),
             ),
+            // InkWell(
+            //   onTap: () {
+            //     showDialog(context: context, builder: CupertinoFullscreenDialogTransition(primaryRouteAnimation: primaryRouteAnimation, secondaryRouteAnimation: secondaryRouteAnimation, child: child, linearTransition: linearTransition));
+            //   },
+            // ),
           ],
         ),
       ),

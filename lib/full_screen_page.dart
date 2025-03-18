@@ -7,8 +7,6 @@ class FullScreenVideo extends StatefulWidget {
   final VideoPlayerController controller;
 
   const FullScreenVideo({super.key, required this.controller});
-  // const FullScreenVideo({super.key});
-
   @override
   State<FullScreenVideo> createState() => _FullScreenVideoState();
 }
@@ -18,11 +16,6 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => buildCompleteActions());
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    //   setState(() {
-    //     rotation = 1;
-    //   });
-    // });
   }
 
   @override
@@ -41,44 +34,70 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
   }
 
   Future<void> buildCompleteActions() async {
-    // await Future.delayed(Durations.long3);
-
+    await Future.delayed(Durations.extralong4);
     changeOrientation();
   }
 
   @override
   Widget build(BuildContext context) {
-    timeDilation = 4;
+    timeDilation = 10;
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Stack(
+      body:
+      // Hero(
+      //   tag: "video",
+      // flightShuttleBuilder: (
+      //   flightContext,
+      //   animation,
+      //   flightDirection,
+      //   fromHeroContext,
+      //   toHeroContext,
+      // ) {
+      //   final slideAnimation = Tween<Offset>(
+      //     begin: const Offset(0.5, 0.0),
+      //     end: Offset(1, 1.0),
+      //   ).animate(
+      //     CurvedAnimation(parent: animation, curve: Curves.easeInOut),
+      //   );
+      //   HeroFlightDirection.pop;
+      //   return SlideTransition(
+      //     position: slideAnimation,
+      //     child: toHeroContext.widget,
+      //   );
+      // },
+      // child:
+      Stack(
         children: [
-          // Hero(
-          //   tag: "video",
-          // child:
-          Hero(
-            tag: "video",
-            child: Align(
-              alignment: Alignment.center,
+          Align(
+            alignment: Alignment.center,
+            child: Hero(
+              tag: "video",
               child: AspectRatio(
                 aspectRatio: widget.controller.value.aspectRatio,
                 child: VideoPlayer(widget.controller),
               ),
             ),
           ),
-          IconButton(
-            icon: const Icon(Icons.fullscreen_exit, color: Colors.white),
-            onPressed: () async {
-              // await Future.microtask(() async {
-              //   await SystemChrome.setPreferredOrientations([
-              //     DeviceOrientation.portraitUp,
-              //   ]);
-              //   await SystemChrome.setEnabledSystemUIMode(
-              //     SystemUiMode.edgeToEdge,
-              //   );
-              // });
-              Navigator.pop(context);
-            },
+
+          // ),
+          
+          Align(
+            alignment: Alignment.bottomRight,
+            child: IconButton(
+              icon: const Icon(Icons.fullscreen_exit, color: Colors.white),
+              onPressed: () async {
+                await Future.microtask(() async {
+                  await SystemChrome.setPreferredOrientations([
+                    DeviceOrientation.portraitUp,
+                  ]);
+                  await SystemChrome.setEnabledSystemUIMode(
+                    SystemUiMode.edgeToEdge,
+                  );
+                });
+                await Future.delayed(Durations.medium1);
+                Navigator.pop(context);
+              },
+            ),
           ),
         ],
       ),
