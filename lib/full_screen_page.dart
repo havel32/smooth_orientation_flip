@@ -23,16 +23,18 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
     super.dispose();
   }
 
-  void changeOrientation() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  Future<void> changeOrientation() async {
+    await Future.microtask(() async {
+      await SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
+      await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    });
   }
 
   Future<void> buildCompleteActions() async {
-    await Future.delayed(Durations.short1);
+    await Future.delayed(Durations.short2);
     changeOrientation();
   }
 
@@ -44,7 +46,7 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
       body: Stack(
         children: [
           Align(
-            alignment: Alignment.topCenter,
+            alignment: Alignment.center,
             child: Hero(
               tag: "video",
               child: AspectRatio(
@@ -53,30 +55,26 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
               ),
             ),
           ),
-
-          // ),
           Align(
             alignment: Alignment.bottomRight,
             child: IconButton(
               icon: const Icon(Icons.fullscreen_exit, color: Colors.white),
               onPressed: () async {
-                // await Future.microtask(() async {
-                //   await SystemChrome.setPreferredOrientations([
-                //     DeviceOrientation.portraitUp,
-                //   ]);
-                //   await SystemChrome.setEnabledSystemUIMode(
-                //     SystemUiMode.edgeToEdge,
-                //   );
-                // });
-                await Future.delayed(Durations.medium1);
-                Navigator.pop(context);
+                await Future.microtask(() async {
+                  await SystemChrome.setPreferredOrientations([
+                    DeviceOrientation.portraitUp,
+                  ]);
+                  await SystemChrome.setEnabledSystemUIMode(
+                    SystemUiMode.edgeToEdge,
+                  );
+                });
+                await Future.delayed(Durations.medium2);
+                if (context.mounted) Navigator.pop(context);
               },
             ),
           ),
         ],
       ),
-      // ),
-      // ),
     );
   }
 }
