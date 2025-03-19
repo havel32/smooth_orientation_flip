@@ -29,12 +29,6 @@ class _VideoAppState extends State<VideoApp>
   }
 
   void _toggleFullScreen() {
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (context) => FullScreenVideo(controller: _controller),
-    //   ),
-    // );
     context.pushTransition(
       type: PageTransitionType.fade,
       childBuilder: (context) => FullScreenVideo(controller: _controller),
