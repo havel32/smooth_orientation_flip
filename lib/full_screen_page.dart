@@ -7,7 +7,6 @@ class FullScreenVideo extends StatefulWidget {
   final VideoPlayerController controller;
 
   const FullScreenVideo({super.key, required this.controller});
-  // const FullScreenVideo({super.key});
 
   @override
   State<FullScreenVideo> createState() => _FullScreenVideoState();
@@ -18,18 +17,6 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => buildCompleteActions());
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    //   setState(() {
-    //     rotation = 1;
-    //   });
-    // });
-  }
-
-  @override
-  void dispose() {
-    // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    super.dispose();
   }
 
   void changeOrientation() {
@@ -41,12 +28,13 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
   }
 
   Future<void> buildCompleteActions() async {
+    await Future.delayed(Durations.short1);
     changeOrientation();
   }
 
   @override
   Widget build(BuildContext context) {
-    timeDilation = 8;
+    timeDilation = 1;
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
@@ -72,13 +60,12 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
                   SystemUiMode.edgeToEdge,
                 );
               });
-              Navigator.pop(context);
+              await Future.delayed(Durations.short1);
+              if (context.mounted) Navigator.pop(context);
             },
           ),
         ],
       ),
-      // ),
-      // ),
     );
   }
 }

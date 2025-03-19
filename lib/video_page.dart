@@ -29,7 +29,6 @@ class _VideoAppState extends State<VideoApp>
   }
 
   void _toggleFullScreen() {
-
     // Navigator.push(
     //   context,
     //   MaterialPageRoute(
@@ -40,50 +39,13 @@ class _VideoAppState extends State<VideoApp>
       type: PageTransitionType.fade,
       childBuilder: (context) => FullScreenVideo(controller: _controller),
     );
-
-    // SystemChrome.setPreferredOrientations([
-    //   DeviceOrientation.landscapeLeft,
-    //   DeviceOrientation.landscapeRight,
-    // ]);
-    // Navigator.push(
-    //   context,
-    //   PageRouteBuilder(
-    //     transitionDuration: const Duration(milliseconds: 200),
-    //     pageBuilder: (context, animation, secondaryAnimation) {
-    //       return FullScreenVideo(controller: _controller);
-    //     },
-    //     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-    //       // final slideAnimation = Tween<Offset>(
-    //       //   begin: const Offset(0.0, 1.0),
-    //       //   end: Offset.zero,
-    //       // ).animate(
-    //       //   CurvedAnimation(parent: animation, curve: Curves.easeInOut),
-    //       // );
-    //       return
-    //       //  SlideTransition(
-    //       //   position: slideAnimation,
-    //       //   child:
-    //       FadeTransition(
-    //         opacity: animation,
-    //         child: child,
-    //         // )
-    //       );
-    //     },
-    //   ),
-    // )
-    // .then((_) {
-    //   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    //   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    // })
-    ;
   }
 
   @override
   Widget build(BuildContext context) {
-    timeDilation = 8;
+    timeDilation = 1;
     double videplayerHeight = 200;
-    double videplayerWidth = 1.666 * videplayerHeight;
-    // double videplayerWidth = _controller.value.aspectRatio * videplayerHeight;
+    double videplayerWidth = _controller.value.aspectRatio * videplayerHeight;
     return Scaffold(
       appBar: AppBar(title: const Text('Video Demo')),
       body: Column(
@@ -114,19 +76,19 @@ class _VideoAppState extends State<VideoApp>
                         onPressed: _toggleFullScreen,
                       ),
                     ),
-                    // Align(
-                    //   alignment: Alignment.center,
-                    //   child: IconButton(
-                    //     onPressed: () {
-                    //       setState(() {
-                    //         _controller.value.isPlaying
-                    //             ? _controller.pause()
-                    //             : _controller.play();
-                    //       });
-                    //     },
-                    //     icon: Icon(Icons.play_arrow, color: Colors.white),
-                    //   ),
-                    // ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _controller.value.isPlaying
+                                ? _controller.pause()
+                                : _controller.play();
+                          });
+                        },
+                        icon: Icon(Icons.play_arrow, color: Colors.white),
+                      ),
+                    ),
                   ],
                 ),
               )
