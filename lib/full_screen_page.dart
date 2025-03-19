@@ -81,7 +81,7 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
                           SystemUiMode.edgeToEdge,
                         );
                       });
-                      await Future.delayed(Durations.short1);
+                      await Future.delayed(Durations.medium2);
                       if (context.mounted) Navigator.pop(context);
                     },
                   ),
